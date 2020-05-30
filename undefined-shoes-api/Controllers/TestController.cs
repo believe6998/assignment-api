@@ -5,9 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace undefined_shoes_api.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TestController : ApiController
     {
         //This resource is For all types of role
@@ -20,7 +22,7 @@ namespace undefined_shoes_api.Controllers
             return Ok("Hello: " + identity.Name);
         }
         //This resource is only For Admin and SuperAdmin role
-        [Authorize(Roles = "SuperAdmin, Admin")]
+        [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         [Route("api/test/resource2")]
         public IHttpActionResult GetResource2()
